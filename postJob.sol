@@ -12,6 +12,7 @@ function getCompany(address a) public view returns(string memory){}
 }
 contract Employee{
    function getCompanyId(address referee) public view returns(address){}
+   function onSelection(address selectedCan,address companyId,string memory Company,string memory rolename,uint salary) public {}
 }
 
 contract projectPost {
@@ -185,6 +186,7 @@ function onCandidateSelect(address CandidateId,uint postId) public payable{
     uint totalReferers=arr.length;
     require(postAll[postId].no_of_available_posts>0,"No posts left to select candidate");
     postAll[postId].no_of_available_posts=postAll[postId].no_of_available_posts-1;
+   EmployeeObject.onSelection(CandidateId,msg.sender,CompanyObj.getCompany(msg.sender),getRoleNameById(postId),getSalary(postId));
     if(postAll[postId].no_of_available_posts==0){
        for (uint i=0;i<allAvailableposts.length;i++){
            if(allAvailableposts[i]==postId){
